@@ -10,10 +10,10 @@ public class AddressBookMain {
 		
 		AddressBook addressBook = new AddressBook();
 		
-		// Add a contact 
+		// Add contact 
 		addressBook.addContact(); 
-		
-		// Update Person name
+				
+		// Update Contact
 		System.out.println("Please enter name to update contact: ");
 		String name = sc.nextLine();
  
@@ -21,9 +21,18 @@ public class AddressBookMain {
 			Contact oldContact = addressBook.takeInput();
 			addressBook.updateContact(name, oldContact);
 		} else {
-			System.out.println("Contact not found with this name!!!");
+			System.out.println("Contact not found with this name!!!\n");
 		}
 		
+		// Delete Contact
+		System.out.println("Please enter name to delete contact: ");
+		String name2 = sc.nextLine();
+		
+		if(addressBook.validateContact(name2)) {
+			addressBook.deleteContact(name2);	
+		} else {
+			System.out.println("Contact not found with this name!!!\n");
+		}				
 		
 		sc.close();
 	}

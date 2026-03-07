@@ -83,8 +83,8 @@ public class Contact {
 	
 	@Override
 	public String toString() {
-		return "Contact [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", address="
-				+ address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + "]";
+		return "Contact [userId: " + userId + " || firstName: " + firstName + " || lastName: " + lastName + " || address: "
+				+ address + " || city: " + city + " || state: " + state + " || zip: " + zip + " || phoneNumber: " + phoneNumber
+				+ " || email: " + email + "]";
 	}
 }

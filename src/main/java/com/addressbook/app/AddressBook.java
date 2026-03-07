@@ -21,12 +21,10 @@ public class AddressBook {
 		System.out.println("Contact added successfully\n"); 
 	}
 	
-	// Update person name
-	public void updateContact(String oldName, Contact newContact) {
-		String input[] = oldName.split(" ");
-		
+	// Update Contact
+	public void updateContact(String oldName, Contact newContact) {		
 		for(Contact contact : contactList) {
-			if(contact.getFirstName().equalsIgnoreCase(input[0]) && contact.getLastName().equalsIgnoreCase(input[1])) {				
+			if(oldName.equalsIgnoreCase(contact.getFirstName() + " " + contact.getLastName())) {				
 				contact.setFirstName(newContact.getFirstName());
 				contact.setLastName(newContact.getLastName());
 				contact.setAddress(newContact.getAddress());
@@ -37,24 +35,31 @@ public class AddressBook {
 				contact.setZip(newContact.getZip()); 
 				
 				System.out.println("Contact updated successful\n");
-				return;
+				break;
 			}
 		}
-		System.out.println("Contact not found with this name!!!");
 	} 
 	
-	// Validate Contact details
-	public boolean validateContact(String name) {
-		String input[] = name.split(" ");
-		
+	// Delete Contact
+	public void deleteContact(String name) {		
 		for(Contact contact : contactList) {
-			if(contact.getFirstName().equalsIgnoreCase(input[0]) && contact.getLastName().equalsIgnoreCase(input[1])) {
+			if(name.equalsIgnoreCase(contact.getFirstName() + " " + contact.getLastName())) {
+				contactList.remove(contact);
+				System.out.println("Contact deleted successfully\n");
+				break;
+			} 
+		}
+	}
+	
+	// Validate Contact details
+	public boolean validateContact(String name) {		
+		for(Contact contact : contactList) {
+			if(name.equalsIgnoreCase(contact.getFirstName() + " " + contact.getLastName())) {
 				return true;
 			}
 		}
 		return false; 
 	}
-	
 	
 	public Contact takeInput() {
 		System.out.println("Enter first name: ");
