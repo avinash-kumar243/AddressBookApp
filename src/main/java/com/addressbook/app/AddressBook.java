@@ -61,6 +61,7 @@ public class AddressBook {
 		return false; 
 	}
 	
+	
 	public Contact takeInput() {
 		System.out.println("Enter first name: ");
 		String firstName = sc.nextLine();
