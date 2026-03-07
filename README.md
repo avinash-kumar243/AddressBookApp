@@ -1,2 +1,2 @@
 # AddressBookApp
-This is about AddressBookApp in dev branch
+This is about AddressBookApp in feature/UC1-ModelContacts branch
