@@ -17,7 +17,44 @@ public class AddressBook {
 	public void addContact() {
 		Contact newContact = takeInput();
 		contactList.add(newContact);
+		
+		System.out.println("Contact added successfully\n"); 
 	}
+	
+	// Update person name
+	public void updateContact(String oldName, Contact newContact) {
+		String input[] = oldName.split(" ");
+		
+		for(Contact contact : contactList) {
+			if(contact.getFirstName().equalsIgnoreCase(input[0]) && contact.getLastName().equalsIgnoreCase(input[1])) {				
+				contact.setFirstName(newContact.getFirstName());
+				contact.setLastName(newContact.getLastName());
+				contact.setAddress(newContact.getAddress());
+				contact.setCity(newContact.getCity());
+				contact.setEmail(newContact.getEmail()); 
+				contact.setPhoneNumber(newContact.getPhoneNumber());
+				contact.setState(newContact.getState());
+				contact.setZip(newContact.getZip()); 
+				
+				System.out.println("Contact updated successful\n");
+				return;
+			}
+		}
+		System.out.println("Contact not found with this name!!!");
+	} 
+	
+	// Validate Contact details
+	public boolean validateContact(String name) {
+		String input[] = name.split(" ");
+		
+		for(Contact contact : contactList) {
+			if(contact.getFirstName().equalsIgnoreCase(input[0]) && contact.getLastName().equalsIgnoreCase(input[1])) {
+				return true;
+			}
+		}
+		return false; 
+	}
+	
 	
 	public Contact takeInput() {
 		System.out.println("Enter first name: ");
