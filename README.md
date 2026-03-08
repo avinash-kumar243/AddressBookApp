@@ -1,4 +1,4 @@
 # AddressBookApp
 
-This is about AddressBookApp in feature/UC12-SortContactByZip branch
+This is about AddressBookApp in feature/UC13-ReadAndWriteFileUsingFileIO branch
 
