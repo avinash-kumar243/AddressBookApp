@@ -1,2 +1,2 @@
 # AddressBookApp
-This is about AddressBookApp in feature/UC6-AddMultipleAddressBook branch
+This is about AddressBookApp in feature/UC7-EnsureNoDuplicate branch
