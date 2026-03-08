@@ -1,4 +1,4 @@
 # AddressBookApp
 
-This is about AddressBookApp in feature/UC11-SortPersonContact branch
+This is about AddressBookApp in feature/UC12-SortContactByZip branch
 
