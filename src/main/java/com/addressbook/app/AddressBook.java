@@ -177,9 +177,16 @@ public class AddressBook {
 		System.out.println("Total number of contacts: " + count + " for state: " + stateName);
 	}
 
-	public void sortPersonContact() {
+	public void sortPersonContactByName() {
 		contactList.stream()
 				   .sorted(Comparator.comparing(Contact::getFirstName))
+				   .collect(Collectors.toList())
+				   .forEach(System.out::println);
+	}
+
+	public void sortPersonContactByZip() {
+		contactList.stream()
+				   .sorted(Comparator.comparing(Contact::getZip))
 				   .collect(Collectors.toList())
 				   .forEach(System.out::println);
 	}
