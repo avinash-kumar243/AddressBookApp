@@ -82,6 +82,17 @@ public class Contact {
 	
 	
 	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) return true;
+		
+		if(obj == null || obj.getClass() != this.getClass()) return false;
+		
+		Contact thatContact = (Contact)obj;
+		
+		return firstName.equalsIgnoreCase(thatContact.getFirstName()) && lastName.equalsIgnoreCase(thatContact.getLastName()); 
+	}
+	
+	@Override
 	public String toString() {
 		return "Contact [userId: " + userId + " || firstName: " + firstName + " || lastName: " + lastName + " || address: "
 				+ address + " || city: " + city + " || state: " + state + " || zip: " + zip + " || phoneNumber: " + phoneNumber

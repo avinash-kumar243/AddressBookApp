@@ -16,9 +16,13 @@ public class AddressBook {
 	// Add a new Contact
 	public void addContact() {
 		Contact newContact = takeInput();
-		contactList.add(newContact);
 		
-		System.out.println("Contact added successfully\n"); 
+		if(!duplicateCheck(newContact)) {
+			contactList.add(newContact);
+			System.out.println("Contact added successfully\n"); 
+		} else {
+			System.out.println("Duplicate contact\n"); 
+		}
 	}
 	
 	// Update Contact
@@ -67,6 +71,16 @@ public class AddressBook {
 			System.out.println(contact);
 		}
 		System.out.println();
+	}
+	
+	// Ensure no duplicate contacts
+	public boolean duplicateCheck(Contact thatContact) {
+		for(Contact contact : contactList) {
+			if(contact.equals(thatContact)) {
+				return true; // Duplicate contact found
+			}
+		}
+		return false; // No duplicate
 	}
 	
 	public Contact takeInput() {
