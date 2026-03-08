@@ -29,6 +29,7 @@ public class AddressBookMain {
 			System.out.println("Enter 4 to view all contacts");
 			System.out.println("Enter 5 to search person in a city or state");
 			System.out.println("Enter 6 to view person by city or state");
+			System.out.println("Enter 7 to count person by city or state");
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -129,6 +130,24 @@ public class AddressBookMain {
 					stateName = sc.nextLine();
 					addressBook.viewPersonByState(stateName); 
 					
+					break;
+					
+				case 7:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					System.out.println("Please enter city name to count all contacts: ");
+					cityName = sc.nextLine();
+					addressBook.countPersonByCity(cityName); 
+					
+					System.out.println("\nPlease enter state name to count all contacts: ");
+					stateName = sc.nextLine();
+					addressBook.countPersonByState(stateName); 
 					break;
 					
 				case 0:

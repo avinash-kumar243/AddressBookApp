@@ -161,4 +161,18 @@ public class AddressBook {
 				   .filter(c -> c.getState().equalsIgnoreCase(stateName))
 				   .forEach(c -> System.out.println("Name: " + c.getFirstName() + " " + c.getLastName() + " || State: " + c.getState()));
 	}
+
+	public void countPersonByCity(String cityName) {
+		long count = contactList.stream()
+				   .filter(c -> c.getCity().equalsIgnoreCase(cityName))
+				   .count();
+		System.out.println("Total number of contacts: " + count + " for city: " + cityName);
+	}
+
+	public void countPersonByState(String stateName) {
+		long count = contactList.stream()
+				   .filter(c -> c.getState().equalsIgnoreCase(stateName))
+				   .count();
+		System.out.println("Total number of contacts: " + count + " for state: " + stateName);
+	}
 }
