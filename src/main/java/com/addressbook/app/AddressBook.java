@@ -1,6 +1,7 @@
 package com.addressbook.app;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -174,5 +175,12 @@ public class AddressBook {
 				   .filter(c -> c.getState().equalsIgnoreCase(stateName))
 				   .count();
 		System.out.println("Total number of contacts: " + count + " for state: " + stateName);
+	}
+
+	public void sortPersonContact() {
+		contactList.stream()
+				   .sorted(Comparator.comparing(Contact::getFirstName))
+				   .collect(Collectors.toList())
+				   .forEach(System.out::println);
 	}
 }
