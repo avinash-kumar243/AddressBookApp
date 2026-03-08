@@ -202,7 +202,8 @@ public class AddressBook {
 	}
 	
 	public void writePersonContact() {
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter("contacts.txt"))) {
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter("DataFiles/"
+				+ "contacts.txt"))) {
 			for(Contact contact : contactList) {
 				writer.write(contact.toString());
 				writer.newLine();
@@ -216,7 +217,7 @@ public class AddressBook {
 	}
 
 	public void readPersonContact() {
-		try(BufferedReader reader = new BufferedReader(new FileReader("contacts.txt"))) {
+		try(BufferedReader reader = new BufferedReader(new FileReader("DataFiles/contacts.txt"))) {
 			
 			String line;
 			while((line = reader.readLine()) != null) {
@@ -229,7 +230,7 @@ public class AddressBook {
 	}
 	
 	public void writeContactsToCSV() {
-	    try(CSVWriter writer = new CSVWriter(new FileWriter("contacts.csv"))) {
+	    try(CSVWriter writer = new CSVWriter(new FileWriter("DataFiles/contacts.csv"))) {
 	        
 	    	for(Contact contact : contactList) {
 	            String[] data = {String.valueOf(contact.getUserId()), contact.getFirstName(), contact.getLastName(), contact.getAddress(), contact.getCity(), contact.getState(), contact.getZip(), contact.getPhoneNumber(), contact.getEmail()};
@@ -243,7 +244,7 @@ public class AddressBook {
 	}
 	
 	public void readContactsFromCSV() {
-	    try(CSVReader reader = new CSVReader(new FileReader("contacts.csv"))) {
+	    try(CSVReader reader = new CSVReader(new FileReader("DataFiles/contacts.csv"))) {
 	        List<String[]> records = reader.readAll();
 
 	        for(String[] record : records) {
@@ -260,7 +261,7 @@ public class AddressBook {
 	public void writeContactsToJSON() {
 		Gson gson = new Gson();
 		
-		try(FileWriter writer = new FileWriter("contacts.json")) {
+		try(FileWriter writer = new FileWriter("DataFiles/contacts.json")) {
 			
 			gson.toJson(contactList, writer);
 			System.out.println("Contacts written to JSON successfully");
@@ -273,7 +274,7 @@ public class AddressBook {
 	public void readContactsFromJSON() { 
 		Gson gson = new Gson();
 		
-		try(FileReader reader = new FileReader("contacts.json")) {
+		try(FileReader reader = new FileReader("DataFiles/contacts.json")) {
 			 
 			Type contactListType = new TypeToken<List<Contact>>() {}.getType();
 			
