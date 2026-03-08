@@ -32,7 +32,8 @@ public class AddressBookMain {
 			System.out.println("Enter 7 to count person by city or state");
 			System.out.println("Enter 8 to sort person contact alphabetically");
 			System.out.println("Enter 9 to sort person contact by zip");
-
+			System.out.println("Enter 10 to write person contact into file");
+			System.out.println("Enter 11 to read person contact from file");
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -175,6 +176,30 @@ public class AddressBookMain {
 					}
 					
 					addressBook.sortPersonContactByZip();
+					break;
+					
+				case 10:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					addressBook.writePersonContact();
+					break;
+					
+				case 11:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					addressBook.readPersonContact();
 					break;
 				
 				case 0:

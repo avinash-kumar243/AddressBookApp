@@ -1,5 +1,10 @@
 package com.addressbook.app;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -189,5 +194,32 @@ public class AddressBook {
 				   .sorted(Comparator.comparing(Contact::getZip))
 				   .collect(Collectors.toList())
 				   .forEach(System.out::println);
+	}
+	
+	public void writePersonContact() {
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter("contacts.txt"))) {
+			for(Contact contact : contactList) {
+				writer.write(contact.toString());
+				writer.newLine();
+			}
+			
+			System.out.println("Contacts written to file successfully");
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void readPersonContact() {
+		try(BufferedReader reader = new BufferedReader(new FileReader("contacts.txt"))) {
+			
+			String line;
+			while((line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
