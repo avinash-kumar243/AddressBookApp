@@ -35,7 +35,9 @@ public class AddressBookMain {
 			System.out.println("Enter 10 to write person contact into file");
 			System.out.println("Enter 11 to read person contact from file");
 			System.out.println("Enter 12 to write person contact into CSV file");
-			System.out.println("Enter 13 to read person contact from CSV file");			
+			System.out.println("Enter 13 to read person contact from CSV file");
+			System.out.println("Enter 14 to write person contact into JSON file");
+			System.out.println("Enter 15 to read person contact from JSON file");
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -227,6 +229,31 @@ public class AddressBookMain {
 					
 					addressBook.readContactsFromCSV();
 					break;
+					
+				case 14:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					addressBook.writeContactsToJSON();
+					break;
+					
+				case 15:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					addressBook.readContactsFromJSON();
+					break;
+					
 					
 				case 0:
 					sc.close();
