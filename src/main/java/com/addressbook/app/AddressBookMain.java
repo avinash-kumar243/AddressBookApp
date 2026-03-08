@@ -18,7 +18,7 @@ public class AddressBookMain {
 	}
 
 	public static void main(String[] args) {
-		String name;
+		String name, cityName, stateName;
 		AddressBook addressBook;
 		
 		while(true) {
@@ -28,6 +28,7 @@ public class AddressBookMain {
 			System.out.println("Enter 3 to delete a contact");
 			System.out.println("Enter 4 to view all contacts");
 			System.out.println("Enter 5 to search person in a city or state");
+			System.out.println("Enter 6 to view person by city or state");
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -106,9 +107,28 @@ public class AddressBookMain {
 					}
 					
 					System.out.println("Please enter city name to search all contacts: ");
-					String cityName = sc.nextLine();
+					cityName = sc.nextLine();
 					
 					addressBook.searchPersonByCity(cityName); 
+					break;
+					
+				case 6:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					System.out.println("Please enter city name to view all contacts: ");
+					cityName = sc.nextLine();
+					addressBook.viewPersonByCity(cityName); 
+					
+					System.out.println("\nPlease enter state name to view all contacts: ");
+					stateName = sc.nextLine();
+					addressBook.viewPersonByState(stateName); 
+					
 					break;
 					
 				case 0:

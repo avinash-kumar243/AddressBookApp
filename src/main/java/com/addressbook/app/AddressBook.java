@@ -147,4 +147,18 @@ public class AddressBook {
 			System.out.println(c);
 		}
 	}
+	
+	// View person name and city
+	public void viewPersonByCity(String cityName) {
+		contactList.stream()
+		   .filter(c -> c.getCity().equalsIgnoreCase(cityName))
+		   .forEach(c -> System.out.println("Name: " + c.getFirstName() + " " + c.getLastName() + " || City: " + c.getCity()));
+	}
+
+	// View person name and state
+	public void viewPersonByState(String stateName) {
+		contactList.stream()
+				   .filter(c -> c.getState().equalsIgnoreCase(stateName))
+				   .forEach(c -> System.out.println("Name: " + c.getFirstName() + " " + c.getLastName() + " || State: " + c.getState()));
+	}
 }
