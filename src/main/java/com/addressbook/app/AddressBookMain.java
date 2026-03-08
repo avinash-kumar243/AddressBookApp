@@ -34,6 +34,8 @@ public class AddressBookMain {
 			System.out.println("Enter 9 to sort person contact by zip");
 			System.out.println("Enter 10 to write person contact into file");
 			System.out.println("Enter 11 to read person contact from file");
+			System.out.println("Enter 12 to write person contact into CSV file");
+			System.out.println("Enter 13 to read person contact from CSV file");			
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -202,6 +204,30 @@ public class AddressBookMain {
 					addressBook.readPersonContact();
 					break;
 				
+				case 12:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					addressBook.writeContactsToCSV();
+					break;
+					
+				case 13:
+					addressBook = getAddressBook();
+					
+					if(addressBook == null) {
+						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
+						system.listAllAddressBook();
+						break;
+					}
+					
+					addressBook.readContactsFromCSV();
+					break;
+					
 				case 0:
 					sc.close();
 					System.out.println("Than you for using our Address Book App"); 

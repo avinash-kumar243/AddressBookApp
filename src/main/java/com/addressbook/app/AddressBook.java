@@ -12,6 +12,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import com.addressbook.app.model.Contact;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 public class AddressBook {
 	
@@ -222,4 +224,34 @@ public class AddressBook {
 			e.printStackTrace();
 		}
 	}
+	
+	public void writeContactsToCSV() {
+	    try(CSVWriter writer = new CSVWriter(new FileWriter("contacts.csv"))) {
+	        
+	    	for(Contact contact : contactList) {
+	            String[] data = {String.valueOf(contact.getUserId()), contact.getFirstName(), contact.getLastName(), contact.getAddress(), contact.getCity(), contact.getState(), contact.getZip(), contact.getPhoneNumber(), contact.getEmail()};
+	            writer.writeNext(data);
+	        }
+	        System.out.println("Contacts written to CSV successfully");
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public void readContactsFromCSV() {
+	    try(CSVReader reader = new CSVReader(new FileReader("contacts.csv"))) {
+	        List<String[]> records = reader.readAll();
+
+	        for(String[] record : records) {
+	            Contact contact = new Contact(Long.parseLong(record[0]), record[1], record[2], record[3], record[4], record[5], record[6], record[7], record[8]);
+
+	            System.out.println(contact);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 }
