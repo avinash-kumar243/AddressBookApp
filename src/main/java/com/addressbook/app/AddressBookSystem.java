@@ -10,8 +10,6 @@ public class AddressBookSystem {
 	public void addAddressBook(String name) {
 		if(!existAddressBook(name)) {
 			addressBookSystem.put(name, new AddressBook()); 
-		} else {
-			System.out.println("Address Book already exist!");
 		}
 	}
 	

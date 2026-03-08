@@ -3,6 +3,7 @@ package com.addressbook.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.addressbook.app.model.Contact;
 
@@ -111,5 +112,39 @@ public class AddressBook {
 		++userId;
 		
 		return new Contact(userId, firstName, lastName, address, city, state, zip, phoneNumber, email); 
+	}
+
+	public void searchPersonByCity(String cityName) {
+		List<Contact> contacts = contactList.stream()
+											.filter(c -> c.getCity().equalsIgnoreCase(cityName))
+											.collect(Collectors.toList());
+		if(contacts.isEmpty()) {
+			System.out.println("No contact found with this city name!!!\n");
+			
+			System.out.println("Please enter state name to search all contacts: ");
+			String stateName = sc.nextLine();
+			
+			searchPersonByStateName(stateName);
+			return;
+		}
+		
+		for(Contact c : contacts) {
+			System.out.println(c);
+		}
+	}
+
+	private void searchPersonByStateName(String stateName) {
+		List<Contact> contacts = contactList.stream()
+											.filter(c -> c.getState().equalsIgnoreCase(stateName))
+											.collect(Collectors.toList());
+		
+		if(contacts.isEmpty()) {
+			System.out.println("No contact found with this state name!!!\n");
+			return;
+		}
+		
+		for(Contact c : contacts) {
+			System.out.println(c);
+		}
 	}
 }
