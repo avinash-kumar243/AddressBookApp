@@ -32,6 +32,7 @@ public class AddressBookMain {
 			System.out.println("Enter 7 to count person by city or state");
 			System.out.println("Enter 8 to sort person contact alphabetically");
 			System.out.println("Enter 9 to sort person contact by zip");
+
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -175,7 +176,7 @@ public class AddressBookMain {
 					
 					addressBook.sortPersonContactByZip();
 					break;
-					
+				
 				case 0:
 					sc.close();
 					System.out.println("Than you for using our Address Book App"); 
