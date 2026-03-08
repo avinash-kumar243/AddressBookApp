@@ -1,0 +1,2 @@
+Contact [userId: 101 || firstName: avi || lastName: kumar || address: sahtha || city: hajipur || state: bihar || zip: 111122 || phoneNumber: 11111111111 || email: avi@gmail.com]
+Contact [userId: 102 || firstName: komal || lastName: sen || address: delhi || city: delhi || state: new delhi || zip: 000000 || phoneNumber: 111122223333 || email: komal@gmail.com]
