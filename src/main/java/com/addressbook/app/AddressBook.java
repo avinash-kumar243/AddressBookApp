@@ -34,7 +34,7 @@ public class AddressBook {
 				contact.setState(newContact.getState());
 				contact.setZip(newContact.getZip()); 
 				
-				System.out.println("Contact updated successful\n");
+				System.out.println("Contact updated successful");
 				break;
 			}
 		}
@@ -45,7 +45,7 @@ public class AddressBook {
 		for(Contact contact : contactList) {
 			if(name.equalsIgnoreCase(contact.getFirstName() + " " + contact.getLastName())) {
 				contactList.remove(contact);
-				System.out.println("Contact deleted successfully\n");
+				System.out.println("Contact deleted successfully");
 				break;
 			} 
 		}
@@ -61,6 +61,13 @@ public class AddressBook {
 		return false; 
 	}
 	
+	// View all Contacts
+	public void viewAllContacts() {
+		for(Contact contact : contactList) {
+			System.out.println(contact);
+		}
+		System.out.println();
+	}
 	
 	public Contact takeInput() {
 		System.out.println("Enter first name: ");
