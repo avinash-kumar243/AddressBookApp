@@ -1,0 +1,13 @@
+[
+  {
+	"id":1,
+	"firstName":"John",
+	"lastName":"Doe",
+	"address":"Street1",
+	"city":"Delhi",
+	"state":"Delhi",
+	"zip":"110001",
+	"phoneNumber":"9999999999",
+	"email":"john@gmail.com"
+  }
+]
