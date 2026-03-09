@@ -30,7 +30,7 @@ public class AddressBookMain {
 			switch(choice) {
 				case 1: 
 					contact = takeInput();
-					query.addContact(contact);
+					query.addContact(contact); 
 					break;
 								
 				case 2:

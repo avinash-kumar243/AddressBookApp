@@ -14,7 +14,7 @@ public class SqlQueries {
 	private List<Contact> contactList = new ArrayList<>();
 	
 	//add new contact to database 
-	public void addContact(Contact contact) {
+	public void addContact(Contact contact) { 
 		String sql = "INSERT INTO contacts (firstName, lastName, address, city, state, zip, phoneNumber, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try(Connection connection = DatabaseConnection.getInstance().getConnection();
@@ -32,7 +32,7 @@ public class SqlQueries {
 			statement.executeUpdate();
 			
 			contactList.add(contact); 
-			System.out.println("Contact addded.");
+			System.out.println("Contact addded."); 
 		}
 		catch(SQLException e) {
 			System.out.println(e.getMessage());
