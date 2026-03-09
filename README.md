@@ -1,3 +1,3 @@
 # AddressBookApp
 
-This is about AddressBookApp in feature/UC23-add-multiple-entries-jsonserver branch
+This is about AddressBookApp in feature/UC24-update-entry-jsonserver branch
