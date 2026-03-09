@@ -30,8 +30,8 @@ class AddressBookAppApplicationTests {
 		assertTrue(query.viewAllContacts().size() > 0); 
 	}
 
-	 @Test
-    public void givenMultipleContacts_whenAdded_shouldSyncWithMemory() {
+	@Test
+    public void givenMultipleContacts_whenAdded_shouldSyncWithMemory() { 
 
         List<Contact> newContacts = new ArrayList<>();
 
@@ -57,4 +57,5 @@ class AddressBookAppApplicationTests {
 
         addressBookMemory.forEach(System.out::println); 
     }
+	 
 }
