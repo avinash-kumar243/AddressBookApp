@@ -13,10 +13,14 @@ public class AddressBookMain {
 	public static void main(String[] args) {
 		SqlQueries query = new SqlQueries();
 		
+		Contact contact;
 		while(true) {
 			System.out.println("\n------------ Address Book App -------------");
 			System.out.println("Enter 1 to add a contact");
 			System.out.println("Enter 2 to view all contacts");
+			System.out.println("Enter 3 to update a contact");
+			System.out.println("Enter 4 to get contact by date range"); 
+
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -25,14 +29,32 @@ public class AddressBookMain {
 			
 			switch(choice) {
 				case 1: 
-					Contact contact = takeInput();
+					contact = takeInput();
 					query.addContact(contact);
 					break;
 								
 				case 2:
 					List<Contact> contactList = query.viewAllContacts();
 					contactList.stream().forEach(System.out::println); 
-					break; 
+					break;
+					
+				case 3:
+					System.out.println("Enter contace firt name: ");
+					String name = sc.nextLine();
+					
+					contact = query.getContactByName(name);
+					query.updateContact(contact);
+					break;
+					
+				case 4:
+					System.out.println("Enter start date: ");
+					String startDate = sc.nextLine();
+					
+					System.out.println("Enter end date: ");
+					String endDate = sc.nextLine();
+					
+					query.getContactsByDateRange(startDate, endDate);
+					break;
 					
 				case 0:
 					sc.close();

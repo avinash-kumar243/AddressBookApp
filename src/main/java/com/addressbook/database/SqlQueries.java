@@ -60,6 +60,39 @@ public class SqlQueries {
 		return contactList;
 	}
 	
+	// Get Contact by name
+	public Contact getContactByName(String firstName) {
+
+	    String sql = "SELECT * FROM contacts WHERE firstName = ?";
+
+	    try(Connection connection = DatabaseConnection.getInstance().getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        statement.setString(1, firstName);
+
+	        ResultSet result = statement.executeQuery();
+
+	        if(result.next()) {
+	            return new Contact(
+	                    result.getLong("userId"),
+	                    result.getString("firstName"),
+	                    result.getString("lastName"),
+	                    result.getString("address"),
+	                    result.getString("city"),
+	                    result.getString("state"),
+	                    result.getString("zip"),
+	                    result.getString("phoneNumber"),
+	                    result.getString("email")
+	            );
+	        }
+
+	    } catch(Exception e) {
+	        System.out.println(e.getMessage());
+	    }
+
+	    return null;
+	}
+	
 	// Update Contacts
 	public void updateContact(Contact contact) {
 		String sql = "UPDATE contacts SET firstName=?, lastName=?, address=?, city=?, state=?, zip=?, phoneNumber=?, email=? WHERE userId=?";
@@ -95,5 +128,39 @@ public class SqlQueries {
 			System.out.println(e.getMessage()); 
 		}
 		
+	}
+	
+	// Retrieve contact from database
+	public List<Contact> getContactsByDateRange(String startDate, String endDate) {
+	    List<Contact> contacts = new ArrayList<>();
+
+	    String sql = "SELECT * FROM contacts WHERE date_added BETWEEN ? AND ?";
+
+	    try(Connection connection = DatabaseConnection.getInstance().getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        statement.setString(1, startDate);
+	        statement.setString(2, endDate);
+
+	        ResultSet result = statement.executeQuery();
+
+	        while(result.next()) {
+	            Contact c = new Contact(
+	                    result.getLong("userId"),
+	                    result.getString("firstName"),
+	                    result.getString("lastName"),
+	                    result.getString("address"),
+	                    result.getString("city"),
+	                    result.getString("state"),
+	                    result.getString("zip"),
+	                    result.getString("phoneNumber"),
+	                    result.getString("email")
+	            );
+	            contacts.add(c);
+	        }
+	    } catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	    }
+	    return contacts;
 	}
 }
