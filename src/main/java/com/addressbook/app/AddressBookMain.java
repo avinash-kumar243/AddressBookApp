@@ -1,5 +1,6 @@
 package com.addressbook.app;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class AddressBookMain {
 			System.out.println("Enter 3 to update a contact");
 			System.out.println("Enter 4 to get contact by date range"); 
 			System.out.println("Enter 5 to get contacts count by city"); 
+			System.out.println("Enter 6 to add multiple contacts using thread"); 
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -62,6 +64,16 @@ public class AddressBookMain {
 					
 					System.out.println(query.getContactCountByCity(city));
 					break;
+					
+				case 6:
+					List<Contact> contacts = new ArrayList<>();
+
+				    contacts.add(new Contact(0,"John","Doe","Street1","Delhi","Delhi","110001","9999999999","john@gmail.com"));
+				    contacts.add(new Contact(0,"Mike","Ross","Street2","Mumbai","MH","400001","8888888888","mike@gmail.com"));
+				    contacts.add(new Contact(0,"Sara","Lee","Street3","Pune","MH","411001","7777777777","sara@gmail.com"));
+
+				    query.addMultipleContacts(contacts);
+				    break;
 					
 				case 0:
 					sc.close();

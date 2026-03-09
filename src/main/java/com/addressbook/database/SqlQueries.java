@@ -184,4 +184,24 @@ public class SqlQueries {
 	    }
 	    return 0;
 	}
+	
+	// Add multiple contacts using thread
+	public void addMultipleContacts(List<Contact> contacts) {
+
+	    contacts.forEach(contact -> {
+	        Thread thread = new Thread(() -> {
+	            addContact(contact);   // your existing JDBC method
+	            System.out.println("Added by Thread: " + Thread.currentThread().getName());
+	        });
+
+	        thread.start();
+
+	        try {
+	            thread.join(); // wait for thread completion
+	        } catch (InterruptedException e) {
+	            System.out.println(e.getMessage());
+	        }
+
+	    });
+	}
 }
