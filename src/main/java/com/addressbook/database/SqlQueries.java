@@ -59,4 +59,41 @@ public class SqlQueries {
 		
 		return contactList;
 	}
+	
+	// Update Contacts
+	public void updateContact(Contact contact) {
+		String sql = "UPDATE contacts SET firstName=?, lastName=?, address=?, city=?, state=?, zip=?, phoneNumber=?, email=? WHERE userId=?";
+		
+		try(Connection connection = DatabaseConnection.getInstance().getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setString(1, contact.getFirstName());
+			statement.setString(2, contact.getLastName());
+			statement.setString(3, contact.getAddress());
+			statement.setString(4, contact.getCity());
+			statement.setString(5, contact.getState());
+			statement.setString(6, contact.getZip());
+			statement.setString(7, contact.getPhoneNumber());
+			statement.setString(8, contact.getEmail());
+			statement.setLong(9, contact.getUserId());
+			
+			int rowUpdated = statement.executeUpdate();
+			
+			if(rowUpdated > 0) {
+				System.out.println("Contact updated successfully");
+				
+				for(int i=0; i<contactList.size(); i++) {
+					if(contactList.get(i).getUserId() == contact.getUserId()) {
+						contactList.set(i, contact);
+						break;
+					}
+				}
+			} else {
+				System.out.println("Contact not found!!!"); 
+			}
+			
+		} catch(SQLException e) {
+			System.out.println(e.getMessage()); 
+		}
+		
+	}
 }
