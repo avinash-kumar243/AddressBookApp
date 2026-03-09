@@ -57,5 +57,46 @@ class AddressBookAppApplicationTests {
 
         addressBookMemory.forEach(System.out::println); 
     }
+	
+	@Test
+    public void givenContact_whenUpdatedInJsonServer_shouldSyncWithMemory() {
+
+        // 1. Get existing contact by id (assume id = 1)
+        Response getResponse = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("http://localhost:3000/contacts/1");
+
+        Contact contact = getResponse.as(Contact.class);
+
+        assertNotNull(contact); // Ensure contact exists
+
+        // 2️. Update fields locally
+        contact.setCity("New Delhi");
+        contact.setPhoneNumber("9998887777");
+
+        // 3️. Send PUT request to JSON Server
+        Response putResponse = given()
+                .contentType(ContentType.JSON)
+                .body(contact)
+                .when()
+                .put("http://localhost:3000/contacts/1");
+
+        // Verify status code 200 (success)
+        putResponse.then().statusCode(200);
+
+        // 4️. Update in-memory AddressBook
+        // Remove old contact if exists
+        addressBookMemory.removeIf(c -> c.getUserId() == contact.getUserId());
+        addressBookMemory.add(contact);
+
+        // Print memory
+        System.out.println("AddressBook Memory after update:");
+        addressBookMemory.forEach(System.out::println);
+
+        // Optional assertion
+        assertTrue(addressBookMemory.stream()
+                .anyMatch(c -> c.getUserId() == 1 && c.getCity().equals("New Delhi")));
+    }
 	 
 }
