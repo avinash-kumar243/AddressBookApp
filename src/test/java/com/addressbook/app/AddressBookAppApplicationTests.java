@@ -98,5 +98,47 @@ class AddressBookAppApplicationTests {
         assertTrue(addressBookMemory.stream()
                 .anyMatch(c -> c.getUserId() == 1 && c.getCity().equals("New Delhi")));
     }
+	
+	@Test
+    public void givenContact_whenDeletedInJsonServer_shouldSyncWithMemory() {
+
+        // Example: Add a contact to memory first (optional)
+        Contact contact = new Contact(0, "Test", "User", "StreetX", "Delhi", "Delhi", "110001", "9999990000", "testuser@gmail.com");
+
+        // POST to JSON Server
+        Response postResponse = given()
+                .contentType(ContentType.JSON)
+                .body(contact)
+                .when()
+                .post("http://localhost:3000/contacts");
+
+        Contact createdContact = postResponse.as(Contact.class);
+
+        // Add to memory
+        addressBookMemory.add(createdContact);
+
+        System.out.println("Memory before deletion:");
+        addressBookMemory.forEach(System.out::println);
+
+        long idToDelete = createdContact.getUserId();
+
+        // 1️⃣ DELETE request to JSON Server
+        Response deleteResponse = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .delete("http://localhost:3000/contacts/" + idToDelete);
+
+        // Verify status code 200 or 204
+        deleteResponse.then().statusCode(200);
+
+        // 2️⃣ Remove from memory
+        addressBookMemory.removeIf(c -> c.getUserId() == idToDelete);
+
+        System.out.println("Memory after deletion:");
+        addressBookMemory.forEach(System.out::println);
+
+        // Optional assertion
+        assertFalse(addressBookMemory.stream().anyMatch(c -> c.getUserId() == idToDelete));
+    }
 	 
 }
