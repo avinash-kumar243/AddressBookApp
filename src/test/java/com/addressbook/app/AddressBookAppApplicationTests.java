@@ -9,6 +9,8 @@ import com.addressbook.database.SqlQueries;
 
 @SpringBootTest
 class AddressBookAppApplicationTests {
+	
+	SqlQueries query = new SqlQueries();
 
 	@Test
 	void contextLoads() {
@@ -16,8 +18,7 @@ class AddressBookAppApplicationTests {
 	
 	@Test
 	public void getDetailTest() throws SQLException {
-		System.out.println(SqlQueries.getAllContacts());
-		assertTrue(SqlQueries.getAllContacts().size() > 0);
+		assertTrue(query.viewAllContacts().size() > 0); 
 	}
 
 }
