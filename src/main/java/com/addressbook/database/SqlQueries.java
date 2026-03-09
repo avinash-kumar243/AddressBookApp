@@ -10,8 +10,6 @@ import java.util.List;
 import com.addressbook.app.model.Contact;
 
 public class SqlQueries {
-//	DatabaseConnection singleton = DatabaseConnection.getInstance();
-//	Connection connection = singleton.getConnection(); 
 	
 	//add new contact to database 
 	public void addContact(Contact contact) {
@@ -39,50 +37,23 @@ public class SqlQueries {
 	}
 	
 	//view all contact to database
-	public void viewAllContact() {		
+	public List<Contact> viewAllContacts() {		
 		String sql = "SELECT * FROM contacts";
+		List<Contact> contactList = new ArrayList<>(); 
 
 		try(Connection connection = DatabaseConnection.getInstance().getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql)) {
 			ResultSet result = statement.executeQuery();
 			
 			while(result.next()) {
-				Contact c = new Contact(result.getLong("userId"), result.getString("first_name"), result.getString("last_name"), result.getString("address"), result.getString("city"), result.getString("state"), result.getString("zip"), result.getString("phone_number"),result.getString("email"));
-				System.out.println(c);
+				Contact c = new Contact(result.getLong("userId"), result.getString("firstName"), result.getString("lastName"), result.getString("address"), result.getString("city"), result.getString("state"), result.getString("zip"), result.getString("phoneNumber"),result.getString("email"));
+				contactList.add(c);
 			}
 		}
 		catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
-	}
-	
-	public static List<Contact> getAllContacts() {
-	    List<Contact> contacts = new ArrayList<>();
-	    String query = "SELECT * FROM contacts";
-
-	    try(Connection con = DatabaseConnection.getInstance().getConnection();
-	        PreparedStatement ps = con.prepareStatement(query);
-	        ResultSet rs = ps.executeQuery()) {
-
-	        while(rs.next()) {
-	            Contact contact = new Contact(
-	                    rs.getLong("userId"),
-	                    rs.getString("firstName"),
-	                    rs.getString("lastName"),
-	                    rs.getString("address"),
-	                    rs.getString("city"),
-	                    rs.getString("state"),
-	                    rs.getString("zip"),
-	                    rs.getString("phoneNumber"),
-	                    rs.getString("email")
-	            );
-
-	            contacts.add(contact);
-	        }
-
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    return contacts;
+		
+		return contactList;
 	}
 }
