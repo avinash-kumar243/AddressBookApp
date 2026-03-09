@@ -1,3 +1,3 @@
 # AddressBookApp
 
-This is about AddressBookApp in feature/UC17-update-contact-and-sync-with-db branch
+This is about AddressBookApp in feature/UC18-retreive-contacts-from-db branch
