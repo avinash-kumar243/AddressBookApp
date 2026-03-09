@@ -20,7 +20,7 @@ public class AddressBookMain {
 			System.out.println("Enter 2 to view all contacts");
 			System.out.println("Enter 3 to update a contact");
 			System.out.println("Enter 4 to get contact by date range"); 
-
+			System.out.println("Enter 5 to get contacts count by city"); 
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -54,6 +54,13 @@ public class AddressBookMain {
 					String endDate = sc.nextLine();
 					
 					query.getContactsByDateRange(startDate, endDate);
+					break;
+					
+				case 5:
+					System.out.println("Enter city: ");
+					String city = sc.nextLine();
+					
+					System.out.println(query.getContactCountByCity(city));
 					break;
 					
 				case 0:

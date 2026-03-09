@@ -163,4 +163,25 @@ public class SqlQueries {
 	    }
 	    return contacts;
 	}
+	
+	// Retrieve contact from database by city
+	public int getContactCountByCity(String city) {
+	    String sql = "SELECT getContactsByCity(?)";
+
+	    try(Connection connection = DatabaseConnection.getInstance().getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql)) {
+
+	        statement.setString(1, city);
+
+	        ResultSet result = statement.executeQuery();
+
+	        if(result.next()) {
+	            return result.getInt(1);
+	        }
+
+	    } catch(SQLException e) {
+	        System.out.println(e.getMessage());
+	    }
+	    return 0;
+	}
 }
