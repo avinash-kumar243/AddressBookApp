@@ -11,24 +11,27 @@ import com.addressbook.app.model.Contact;
 
 public class SqlQueries {
 	
+	private List<Contact> contactList = new ArrayList<>();
+	
 	//add new contact to database 
 	public void addContact(Contact contact) {
-		String sql = "INSERT INTO contacts (userId, firstName, lastName, address, city, state, zip, phoneNumber, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO contacts (firstName, lastName, address, city, state, zip, phoneNumber, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try(Connection connection = DatabaseConnection.getInstance().getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql)) {
-			
-			statement.setLong(1, contact.getUserId());
-			statement.setString(2, contact.getFirstName());
-			statement.setString(3, contact.getLastName());
-			statement.setString(4, contact.getAddress());
-			statement.setString(5, contact.getCity());
-			statement.setString(6, contact.getState());
-			statement.setString(7, contact.getZip());
-			statement.setString(8, contact.getPhoneNumber());
-			statement.setString(9, contact.getEmail());
+
+			statement.setString(1, contact.getFirstName());
+			statement.setString(2, contact.getLastName());
+			statement.setString(3, contact.getAddress());
+			statement.setString(4, contact.getCity());
+			statement.setString(5, contact.getState());
+			statement.setString(6, contact.getZip());
+			statement.setString(7, contact.getPhoneNumber());
+			statement.setString(8, contact.getEmail());
 			
 			statement.executeUpdate();
+			
+			contactList.add(contact); 
 			System.out.println("Contact addded.");
 		}
 		catch(SQLException e) {
@@ -37,9 +40,9 @@ public class SqlQueries {
 	}
 	
 	//view all contact to database
-	public List<Contact> viewAllContacts() {		
+	public List<Contact> viewAllContacts() {	
+		contactList.clear();
 		String sql = "SELECT * FROM contacts";
-		List<Contact> contactList = new ArrayList<>(); 
 
 		try(Connection connection = DatabaseConnection.getInstance().getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql)) {

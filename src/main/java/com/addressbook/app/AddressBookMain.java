@@ -7,8 +7,7 @@ import com.addressbook.app.model.Contact;
 import com.addressbook.database.SqlQueries;
 
 public class AddressBookMain {
-	
-	static long userId = 101;
+
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -70,9 +69,7 @@ public class AddressBookMain {
 		
 		System.out.println("Enter email: ");
 		String email = sc.nextLine();
-		 
-		++userId;
 		
-		return new Contact(userId, firstName, lastName, address, city, state, zip, phoneNumber, email); 
+		return new Contact(0, firstName, lastName, address, city, state, zip, phoneNumber, email); 
 	}
 }

@@ -8,6 +8,14 @@ public class DatabaseConnection {
     private static DatabaseConnection instance;
 
     private DatabaseConnection() {}
+    
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static DatabaseConnection getInstance() {
 
@@ -20,20 +28,16 @@ public class DatabaseConnection {
 
     public Connection getConnection() {
 
-        Connection connection = null;
-
         try {
 
-            connection = DriverManager.getConnection(
+           return DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/addressbook",
                     "root",
                     "Avinash269"
             );
 
         } catch(Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Database connection failed!!!");
         }
-
-        return connection;
     }
 }
