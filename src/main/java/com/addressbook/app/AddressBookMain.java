@@ -1,43 +1,23 @@
 package com.addressbook.app;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.addressbook.app.model.Contact;
+import com.addressbook.database.SqlQueries;
 
 public class AddressBookMain {
 	
+	static long userId = 101;
 	static Scanner sc = new Scanner(System.in);
-	static AddressBookSystem system = new AddressBookSystem();
-
-	// Get Address Book Object
-	public static AddressBook getAddressBook() {
-		System.out.println("Please enter address book name");
-		String addressBookName = sc.nextLine();
-		
-		return system.getAddressBook(addressBookName); 
-	}
 
 	public static void main(String[] args) {
-		String name, cityName, stateName;
-		AddressBook addressBook;
+		SqlQueries query = new SqlQueries();
 		
 		while(true) {
 			System.out.println("\n------------ Address Book App -------------");
 			System.out.println("Enter 1 to add a contact");
-			System.out.println("Enter 2 to update a contact");
-			System.out.println("Enter 3 to delete a contact");
-			System.out.println("Enter 4 to view all contacts");
-			System.out.println("Enter 5 to search person in a city or state");
-			System.out.println("Enter 6 to view person by city or state");
-			System.out.println("Enter 7 to count person by city or state");
-			System.out.println("Enter 8 to sort person contact alphabetically");
-			System.out.println("Enter 9 to sort person contact by zip");
-			System.out.println("Enter 10 to write person contact into file");
-			System.out.println("Enter 11 to read person contact from file");
-			System.out.println("Enter 12 to write person contact into CSV file");
-			System.out.println("Enter 13 to read person contact from CSV file");
-			System.out.println("Enter 14 to write person contact into JSON file");
-			System.out.println("Enter 15 to read person contact from JSON file");
+			System.out.println("Enter 2 to view all contacts");
 			System.out.println("Enter 0 to exit");
 			System.out.println("-------------------------------------------");
 			
@@ -46,214 +26,14 @@ public class AddressBookMain {
 			
 			switch(choice) {
 				case 1: 
-					System.out.println("Please enter address book name");
-					String addressBookName = sc.nextLine();
-
-					system.addAddressBook(addressBookName);
-					
-					addressBook = system.getAddressBook(addressBookName); 
-					
-					addressBook.addContact();
+					Contact contact = takeInput();
+					query.addContact(contact);
 					break;
-					 
+								
 				case 2:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-										
-					System.out.println("Please enter name to update contact: ");
-					name = sc.nextLine();
-			 
-					if(addressBook.validateContact(name)) {
-						Contact oldContact = addressBook.takeInput();
-						addressBook.updateContact(name, oldContact);
-					} else {
-						System.out.println("Contact not found with this name!!!");
-					}
-					break;
-					
-				case 3:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					System.out.println("Please enter name to delete contact: ");
-					name = sc.nextLine();
-					
-					if(addressBook.validateContact(name)) {
-						addressBook.deleteContact(name);	 
-					} else {
-						System.out.println("Contact not found with this name!!!");
-					}
+					List<Contact> contactList = query.viewAllContacts();
+					contactList.stream().forEach(System.out::println); 
 					break; 
-					
-				case 4:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					addressBook.viewAllContacts();
-					break; 
-					
-				case 5:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					System.out.println("Please enter city name to search all contacts: ");
-					cityName = sc.nextLine();
-					
-					addressBook.searchPersonByCity(cityName); 
-					break;
-					
-				case 6:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					System.out.println("Please enter city name to view all contacts: ");
-					cityName = sc.nextLine();
-					addressBook.viewPersonByCity(cityName); 
-					
-					System.out.println("\nPlease enter state name to view all contacts: ");
-					stateName = sc.nextLine();
-					addressBook.viewPersonByState(stateName); 
-					
-					break;
-					
-				case 7:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					System.out.println("Please enter city name to count all contacts: ");
-					cityName = sc.nextLine();
-					addressBook.countPersonByCity(cityName); 
-					
-					System.out.println("\nPlease enter state name to count all contacts: ");
-					stateName = sc.nextLine();
-					addressBook.countPersonByState(stateName); 
-					break;
-					
-				case 8:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.sortPersonContactByName();
-					break;
-					
-				case 9:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.sortPersonContactByZip();
-					break;
-					
-				case 10:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.writePersonContact();
-					break;
-					
-				case 11:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.readPersonContact();
-					break;
-				
-				case 12:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.writeContactsToCSV();
-					break;
-					
-				case 13:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.readContactsFromCSV();
-					break;
-					
-				case 14:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.writeContactsToJSON();
-					break;
-					
-				case 15:
-					addressBook = getAddressBook();
-					
-					if(addressBook == null) {
-						System.out.println("\nAddress book doesn't exist!!!\n\nAvailable address books are");
-						system.listAllAddressBook();
-						break;
-					}
-					
-					addressBook.readContactsFromJSON();
-					break;
-					
 					
 				case 0:
 					sc.close();
@@ -264,5 +44,35 @@ public class AddressBookMain {
 					System.out.println("Invalid choice!!!");		
 			}
 		}
+	}
+	
+	public static Contact takeInput() {
+		System.out.println("Enter first name: ");
+		String firstName = sc.nextLine();
+		
+		System.out.println("Enter last name: ");
+		String lastName = sc.nextLine();
+		
+		System.out.println("Enter address name: ");
+		String address = sc.nextLine();
+		
+		System.out.println("Enter city name: ");
+		String city = sc.nextLine();
+		
+		System.out.println("Enter state name: ");
+		String state = sc.nextLine();
+		
+		System.out.println("Enter zip: ");
+		String zip = sc.nextLine();
+		
+		System.out.println("Enter phoneNumber: ");
+		String phoneNumber = sc.nextLine();
+		
+		System.out.println("Enter email: ");
+		String email = sc.nextLine();
+		 
+		++userId;
+		
+		return new Contact(userId, firstName, lastName, address, city, state, zip, phoneNumber, email); 
 	}
 }
